@@ -16,6 +16,7 @@ import { PokeDetailsComponent } from '../poke-details/poke-details.component';
 })
 export class PokeVoteComponent {
   voteArray: Array<Pokemon> = [];
+  votedPokemons: Array<Pokemon> = [];
 
   constructor(
     private pokemonService: PokemonService,
@@ -37,6 +38,22 @@ export class PokeVoteComponent {
     this.dialog.open(PokeDetailsComponent, {
       data: pokemon,
     });
+  }
+
+  voteForPokemon(pokemon: Pokemon) {
+    const selectedPokemon = Object.assign({}, pokemon);;
+    let ifExisting = false;
+    for(let votedPokemon of this.votedPokemons) {
+      if(votedPokemon.id === selectedPokemon.id) {
+        votedPokemon.voteCount++;
+        ifExisting = true;
+      }
+    }
+    if(!ifExisting) {
+      selectedPokemon.voteCount++;
+      this.votedPokemons = [...this.votedPokemons, selectedPokemon];
+    }
+    console.log(this.votedPokemons);
   }
 
   getPokemons() {

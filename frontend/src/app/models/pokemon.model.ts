@@ -6,7 +6,7 @@ export interface Pokemon {
     weight: number;
     height: number;
     stats: [Stat];
-    voteCount?: number;
+    voteCount: number;
   }
 
   export interface Ability {

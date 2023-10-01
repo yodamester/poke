@@ -22,6 +22,7 @@ export class PokemonService {
             weight
             height
             img
+            voteCount
             abilities {
               name
             }

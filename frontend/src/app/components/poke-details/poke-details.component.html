@@ -1,1 +1,27 @@
-<div>{{data.name}}</div>
+<img src="{{data.img}}" />
+<div class="value-wrapper">
+    <span class="label">Name</span>
+    <span class="value">{{data.name}}</span>
+</div>
+<div class="value-wrapper">
+    <span class="label">Weight</span>
+    <span class="value">{{data.weight}}</span>
+</div>
+<div class="value-wrapper">
+    <span class="label">Height</span>
+    <span class="value">{{data.height}}</span>
+</div>
+
+<div *ngFor="let ability of data.abilities">
+    <span>{{ability.name}}</span>
+</div>
+
+<div *ngFor="let stat of data.stats">
+    <div class="value-wrapper">
+        <span class="label">{{stat.name}}</span>
+        <span class="value">{{stat.value}}</span>
+    </div>
+</div>
+
+<button mat-button mat-dialog-close>Close</button>
+<button mat-button>Vote</button>

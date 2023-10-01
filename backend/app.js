@@ -35,6 +35,7 @@ const typeDefs = gql`
     weight: Int
     height: Int
     stats: [Stat]
+    voteCount: Int
   }
   
   type Ability {
@@ -58,7 +59,8 @@ const resolvers = {
         abilities: (parent) => parent.abilities,
         weight: (parent) => parent.weight,
         height: (parent) => parent.height,
-        stats: (parent) => parent.stats
+        stats: (parent) => parent.stats,
+        voteCount: () => 0
     },
     Ability: {
         name: (parent) => parent.ability.name
