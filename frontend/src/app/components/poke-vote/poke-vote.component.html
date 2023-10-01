@@ -8,7 +8,3 @@
     <button mat-button (click)="openDialog(pokemon)">Abilities & stats</button>
     <button mat-button (click)="voteForPokemon(pokemon)">Vote</button>
 </mat-card>
-
-<div *ngFor="let pokemon2 of pokemonListObservable | async">
-    {{pokemon2.name}}
-</div>

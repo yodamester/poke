@@ -12,12 +12,9 @@ export function pokemonListReducer(
         const selectedPokemon = Object.assign({}, (action as PokemonVoteAction).payload);
         let newState = JSON.parse(JSON.stringify(state));
         let ifExisting = false;
-
         for(let votedPokemon of newState) {
           if(votedPokemon.id === selectedPokemon.id) {
-
             votedPokemon.voteCount++;
-           
             ifExisting = true;
           }
         }

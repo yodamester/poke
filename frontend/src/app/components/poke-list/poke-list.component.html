@@ -1,1 +1,7 @@
-<p>poke-list works!</p>
+<div *ngIf="(pokemonListObservable | async).length === 0">
+    No voted Pokemons yet.
+</div>
+
+<div *ngFor="let pokemon of pokemonListObservable | async">
+    {{pokemon.name}}
+</div>

@@ -10,6 +10,7 @@ import { PokeDetailsComponent } from '../poke-details/poke-details.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { PokemonVotedAction } from 'src/app/store/actions/pokemonList.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-poke-vote',
@@ -25,7 +26,8 @@ export class PokeVoteComponent {
   constructor(
     private pokemonService: PokemonService,
     public dialog: MatDialog,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
     ) {
     this.getPokemons();
   }
@@ -38,8 +40,7 @@ export class PokeVoteComponent {
 
   voteForPokemon(pokemon: Pokemon) {
     this.store.dispatch(new PokemonVotedAction(pokemon));
-    //this.pokemonListObservable = this.store.select((store) => store.pokemonList);
-    //console.log(this.votedPokemons);
+    this.router.navigate(['/poke-list']);
   }
 
   getPokemons() {
