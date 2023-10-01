@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Observable } from 'rxjs';
+import { Pokemon } from 'src/app/models/pokemon.model';
 
 @Component({
   selector: 'app-poke-list',
@@ -10,9 +11,16 @@ import { Observable } from 'rxjs';
 })
 export class PokeListComponent {
   pokemonListObservable!: Observable<any>;
+  pokemonList!: Array<Pokemon>;
+  displayedColumns: string[] = ['name', 'voteCount'];
   
   constructor(private store: Store<AppState>) {
-    this.pokemonListObservable = this.store.select((store) => store.pokemonList);
+    this.store.select((store) => store.pokemonList).subscribe(data => {
+      if(data) {
+        this.pokemonList = data;
+        console.log(this.pokemonList);
+      }
+    });
   }
 
 }

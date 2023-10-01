@@ -17,6 +17,7 @@ import { PokeDetailsComponent } from './components/poke-details/poke-details.com
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { pokemonListReducer } from './store/reducers/pokemonList.reducer';
+import { MatTableModule}  from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { pokemonListReducer } from './store/reducers/pokemonList.reducer';
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
+    MatTableModule,
     StoreModule.forRoot({
       pokemonList: pokemonListReducer
     }),
