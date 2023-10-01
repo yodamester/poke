@@ -5,7 +5,8 @@ export interface Pokemon {
     abilities: [Ability];
     weight: number;
     height: number;
-    stats: [Stat]
+    stats: [Stat];
+    voteCount?: number;
   }
 
   export interface Ability {

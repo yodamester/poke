@@ -1,0 +1,10 @@
+<mat-card *ngFor="let pokemon of voteArray">
+    <mat-card-content>
+        <h2>{{pokemon.name}}</h2>
+        <img src="{{pokemon.img}}" />
+        <div>{{pokemon.height}}</div>
+        <div>{{pokemon.weight}}</div>
+    </mat-card-content>
+    <button mat-button (click)="openDialog(pokemon)">Abilities & stats</button>
+    <button mat-button>Vote</button>
+</mat-card>
