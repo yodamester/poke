@@ -2,11 +2,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { PokemonService } from '../../services/pokemon/pokemon.service';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Pokemon } from '../../models/pokemon.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PokeDetailsComponent } from '../poke-details/poke-details.component';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { PokemonVotedAction } from 'src/app/store/actions/pokemonList.action';
 
 @Component({
   selector: 'app-poke-vote',
@@ -17,21 +20,14 @@ import { PokeDetailsComponent } from '../poke-details/poke-details.component';
 export class PokeVoteComponent {
   voteArray: Array<Pokemon> = [];
   votedPokemons: Array<Pokemon> = [];
+  pokemonListObservable!: Observable<any>;
 
   constructor(
     private pokemonService: PokemonService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store<AppState>
     ) {
-    /*this.pokemonService.getPokemons().subscribe(data => {
-      console.log(data);
-    });
-
-    this.pokemonService.getPokemon().subscribe(data => {
-      console.log(data);
-    });*/
-
     this.getPokemons();
-    
   }
 
   openDialog(pokemon: Pokemon) {
@@ -41,19 +37,9 @@ export class PokeVoteComponent {
   }
 
   voteForPokemon(pokemon: Pokemon) {
-    const selectedPokemon = Object.assign({}, pokemon);;
-    let ifExisting = false;
-    for(let votedPokemon of this.votedPokemons) {
-      if(votedPokemon.id === selectedPokemon.id) {
-        votedPokemon.voteCount++;
-        ifExisting = true;
-      }
-    }
-    if(!ifExisting) {
-      selectedPokemon.voteCount++;
-      this.votedPokemons = [...this.votedPokemons, selectedPokemon];
-    }
-    console.log(this.votedPokemons);
+    this.store.dispatch(new PokemonVotedAction(pokemon));
+    //this.pokemonListObservable = this.store.select((store) => store.pokemonList);
+    //console.log(this.votedPokemons);
   }
 
   getPokemons() {

@@ -14,6 +14,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PokeDetailsComponent } from './components/poke-details/poke-details.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { pokemonListReducer } from './store/reducers/pokemonList.reducer';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,13 @@ import { PokeDetailsComponent } from './components/poke-details/poke-details.com
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    StoreModule.forRoot({
+      pokemonList: pokemonListReducer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   providers: [
     {
