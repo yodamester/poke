@@ -1,5 +1,4 @@
 .inner-wrapper {
-    padding: 1%;
 
     h2 {
         color: #fff;
@@ -9,10 +8,34 @@
         width: 46%;
         display: inline-block !important;
         margin: 2%;
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.8);
 
         h3 {
             font-size: 22px;
+        }
+
+        button {
+            background: #B01DE2 !important;
+            color: #fff !important;
+            margin-right: 10px;
+            box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5);
+
+            &:hover {
+                background: #E21DB2 !important;
+            }
+        }
+
+        .value-wrapper {
+            margin-bottom: 15px;
+            
+            span {
+                display: inline-block;
+                width: 50%;
+            }
+
+            .label {
+                font-weight: bold;
+            }
         }
     }
 }
