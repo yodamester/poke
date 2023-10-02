@@ -20,6 +20,7 @@ import { pokemonListReducer } from './store/reducers/pokemonList.reducer';
 import { MatTableModule}  from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorCatchingInterceptor } from './interceptors/error-catching.interceptor';
+import { metaReducers } from './store/reducers/pokemonList.metareducer';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,9 @@ import { ErrorCatchingInterceptor } from './interceptors/error-catching.intercep
     MatSnackBarModule,
     StoreModule.forRoot({
       pokemonList: pokemonListReducer
+    },
+    { 
+      metaReducers: metaReducers
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25
