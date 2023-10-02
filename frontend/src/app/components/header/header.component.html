@@ -9,7 +9,7 @@
         <button [disabled]="pokemonService.offset === 0" (click)="changePagination({increase: false})">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
-        <span>Currently displaying Pokemons from {{pokemonService.offset}} to {{pokemonService.limit}}</span>
+        <span>Currently displaying Pokemons from {{pokemonService.offset}} to {{pokemonService.offset+pokemonService.limit}}</span>
         <button (click)="changePagination({increase: true})">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>

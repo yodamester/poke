@@ -37,10 +37,8 @@ export class HeaderComponent {
   changePagination(data: any) {
     if(data.increase) {
       this.pokemonService.offset = this.pokemonService.offset+50;
-      this.pokemonService.limit = this.pokemonService.limit+50;
     } else {
       this.pokemonService.offset = this.pokemonService.offset-50;
-      this.pokemonService.limit = this.pokemonService.limit-50;
     }
     this.pokemonService.reloadPokemonList.next(true);
   }

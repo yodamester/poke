@@ -8,7 +8,7 @@ import { Pokemon } from 'src/app/models/pokemon.model';
   providedIn: 'root'
 })
 export class PokemonService {
-  public pokemonQuery: QueryRef<{bookingDetails: [Pokemon]}, { limit: number, offset: number}>;
+  public pokemonQuery: QueryRef<{pokemons: [Pokemon]}, { limit: number, offset: number}>;
   public reloadPokemonList: BehaviorSubject<boolean>;
   public limit = 50;
   public offset = 0;

@@ -31,7 +31,12 @@ export class PokeVoteComponent {
 
     this.pokemonService.reloadPokemonList.subscribe(res => {
       if(res) {
-        this.pokemonService.pokemonQuery.refetch({ limit: this.pokemonService.limit, offset: this.pokemonService.offset});
+        this.pokemonService.pokemonQuery.refetch({ limit: this.pokemonService.limit, offset: this.pokemonService.offset}).then(result => {
+          this.pokemonList = result.data.pokemons;
+          this.generateRandomPairs(result.data.pokemons);
+          this.pokemonService.reloadPokemonList.next(false);
+          this.snackbarService.openSnackBar('Pokemon list refreshed');
+        });
       }
     });
   }
