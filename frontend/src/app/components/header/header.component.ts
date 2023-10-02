@@ -1,6 +1,4 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
 import { PokemonService } from 'src/app/services/pokemon/pokemon.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

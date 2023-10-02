@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { PokemonVotedAction } from 'src/app/store/actions/pokemonList.action';
 import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-poke-vote',
@@ -25,7 +26,8 @@ export class PokeVoteComponent {
     private pokemonService: PokemonService,
     public dialog: MatDialog,
     private store: Store<AppState>,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private router: Router
     ) {
     this.getPokemons();
 
@@ -36,6 +38,7 @@ export class PokeVoteComponent {
           this.generateRandomPairs(result.data.pokemons);
           this.pokemonService.reloadPokemonList.next(false);
           this.snackbarService.openSnackBar('Pokemon list refreshed');
+          this.router.navigate(['/poke-vote']);
         });
       }
     });
@@ -45,7 +48,7 @@ export class PokeVoteComponent {
     const dialogRef = this.dialog.open(PokeDetailsComponent, {
       data: pokemon,
       width: '50%'
-    });
+    },);
     dialogRef.afterClosed().subscribe(res => {
       if(res?.voted) {
         this.generateRandomPairs(this.pokemonList);

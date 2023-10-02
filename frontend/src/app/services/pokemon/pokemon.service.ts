@@ -43,12 +43,4 @@ export class PokemonService {
 
       this.reloadPokemonList = new BehaviorSubject<boolean>(false);
    }
-
-  getPokemons(): Observable<any> {
-    return this.http.get<any>('http://localhost:4000/getPokemons');
-  }
-
-  getPokemon(): Observable<any> {
-    return this.http.get<any>('https://pokeapi.co/api/v2/pokemon/1/');
-  }
 }
