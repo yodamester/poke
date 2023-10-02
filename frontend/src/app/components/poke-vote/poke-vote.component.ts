@@ -1,16 +1,13 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { Component, ViewEncapsulation, Inject } from '@angular/core';
 import { PokemonService } from '../../services/pokemon/pokemon.service';
 import { Observable, take } from 'rxjs';
 import { Pokemon } from '../../models/pokemon.model';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { PokeDetailsComponent } from '../poke-details/poke-details.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { PokemonVotedAction } from 'src/app/store/actions/pokemonList.action';
-import { Router } from '@angular/router';
+import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-poke-vote',
@@ -22,29 +19,37 @@ export class PokeVoteComponent {
   voteArray: Array<Pokemon> = [];
   votedPokemons: Array<Pokemon> = [];
   pokemonListObservable!: Observable<any>;
+  pokemonList: Array<Pokemon> = [];
 
   constructor(
     private pokemonService: PokemonService,
     public dialog: MatDialog,
     private store: Store<AppState>,
-    private router: Router
+    private snackbarService: SnackbarService
     ) {
     this.getPokemons();
   }
 
   openDialog(pokemon: Pokemon) {
-    this.dialog.open(PokeDetailsComponent, {
+    const dialogRef = this.dialog.open(PokeDetailsComponent, {
       data: pokemon,
     });
+    dialogRef.afterClosed().subscribe(res => {
+      if(res.voted) {
+        this.generateRandomPairs(this.pokemonList);
+      }
+    })
   }
 
   voteForPokemon(pokemon: Pokemon) {
     this.store.dispatch(new PokemonVotedAction(pokemon));
-    this.router.navigate(['/poke-list']);
+    this.generateRandomPairs(this.pokemonList);
+    this.snackbarService.openSnackBar('You voted for '+pokemon.name);
   }
 
   getPokemons() {
     this.pokemonService.pokemonQuery.valueChanges.pipe(take(1)).subscribe((result: any) => {
+      this.pokemonList = result.data.pokemons;
       this.generateRandomPairs(result.data.pokemons);
     });
   }
