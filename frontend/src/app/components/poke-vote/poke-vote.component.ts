@@ -44,9 +44,10 @@ export class PokeVoteComponent {
   openDialog(pokemon: Pokemon) {
     const dialogRef = this.dialog.open(PokeDetailsComponent, {
       data: pokemon,
+      width: '50%'
     });
     dialogRef.afterClosed().subscribe(res => {
-      if(res.voted) {
+      if(res?.voted) {
         this.generateRandomPairs(this.pokemonList);
       }
     })

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Pokemon } from 'src/app/models/pokemon.model';
 import { Store } from '@ngrx/store';
@@ -8,7 +8,8 @@ import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
 @Component({
   selector: 'app-poke-details',
   templateUrl: './poke-details.component.html',
-  styleUrls: ['./poke-details.component.scss']
+  styleUrls: ['./poke-details.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PokeDetailsComponent {
   constructor(

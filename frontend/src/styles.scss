@@ -16,3 +16,19 @@ h2 {
 .inner-wrapper {
     padding: 1%;
 }
+
+.value-wrapper {
+    margin-bottom: 15px;
+
+    span {
+        display: inline-block;
+        width: 50%;
+        font-size: 12px;
+        text-indent: 2%;
+    }
+
+    .label {
+        font-weight: bold;
+        width: 50%;
+    }
+}
