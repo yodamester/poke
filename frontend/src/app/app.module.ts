@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
@@ -18,6 +18,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { pokemonListReducer } from './store/reducers/pokemonList.reducer';
 import { MatTableModule}  from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ErrorCatchingInterceptor } from './interceptors/error-catching.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { MatTableModule}  from '@angular/material/table';
     MatButtonModule,
     MatDialogModule,
     MatTableModule,
+    MatSnackBarModule,
     StoreModule.forRoot({
       pokemonList: pokemonListReducer
     }),
@@ -45,6 +48,11 @@ import { MatTableModule}  from '@angular/material/table';
     })
   ],
   providers: [
+    {
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorCatchingInterceptor,
+			multi: true
+		 },
     {
 			provide: APOLLO_OPTIONS,
 			useFactory(httpLink: HttpLink) {
