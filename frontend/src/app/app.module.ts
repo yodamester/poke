@@ -26,6 +26,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { environment } from './environment/environments';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 				return {
 					cache: new InMemoryCache(),
 					link: httpLink.create({
-						uri: 'http://localhost:4000/api'
+						uri: environment.api_url
 					}),
 				};
 			},
