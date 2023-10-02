@@ -24,6 +24,8 @@ export function pokemonListReducer(
         }
 
         return newState;
+      case PokemonListActionType.LIST_CLEARED:
+        return [];
     default:
         return state;
   }
