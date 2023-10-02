@@ -11,17 +11,16 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 })
 export class PokeListComponent {
   pokemonListObservable!: Observable<any>;
-  pokemonList!: Array<Pokemon>;
+  pokemonList: Array<Pokemon> = [];
   displayedColumns: string[] = ['name', 'voteCount'];
   
   constructor(private store: Store<AppState>) {
     this.store.select((store) => store.pokemonList).subscribe(data => {
       if(data) {
-        let sajt = data;
-        sajt.sort(
+        let pokeArray = [...data];
+        pokeArray.sort(
           (p1, p2) => (p1.voteCount < p2.voteCount) ? 1 : (p1.voteCount > p2.voteCount) ? -1 : 0);
-      this.pokemonList = sajt;
-        console.log(this.pokemonList);
+        this.pokemonList = pokeArray.slice(0,10);
       }
     });
   }
