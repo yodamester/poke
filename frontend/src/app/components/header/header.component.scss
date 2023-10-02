@@ -52,9 +52,15 @@ header {
             }
 
             &:hover {
-
                 mat-icon {
                     color: #E21DB2 !important;
+                }
+            }
+
+            &:disabled {
+                mat-icon {
+                    color: #ccc !important;
+                    cursor: default;
                 }
             }
         }

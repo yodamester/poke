@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon/pokemon.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
@@ -12,12 +12,21 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class HeaderComponent {
   @Input({ required: true }) public title!: string;
+  isPaginationActive = true;
 
   constructor(
     public pokemonService: PokemonService,
     private router: Router,
     public dialog: MatDialog
-    ) {}
+    ) {
+      this.router.events.subscribe((event) => {
+        if(event instanceof NavigationEnd && event.url === '/poke-list') {
+          this.isPaginationActive = false;
+        } else if(event instanceof NavigationEnd) {
+          this.isPaginationActive = true;
+        }
+      });
+    }
 
   openDialog() {
     this.dialog.open(ConfirmDialogComponent, {

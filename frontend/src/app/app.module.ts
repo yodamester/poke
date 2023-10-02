@@ -78,7 +78,7 @@ import { environment } from './environment/environments';
 				return {
 					cache: new InMemoryCache(),
 					link: httpLink.create({
-						uri: environment.api_url
+						uri: environment.apiKey
 					}),
 				};
 			},

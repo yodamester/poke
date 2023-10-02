@@ -5,7 +5,7 @@
         <button mat-button (click)="goToPokemonVote()">Vote for Pokemons</button>
         <button mat-button (click)="goToPokemonList()">Top 10 Pokemons</button>
     </nav>
-    <div class="pagination">
+    <div class="pagination" *ngIf="isPaginationActive">
         <button [disabled]="pokemonService.offset === 0" (click)="changePagination({increase: false})">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
