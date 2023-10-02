@@ -21,6 +21,9 @@ import { MatTableModule}  from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorCatchingInterceptor } from './interceptors/error-catching.interceptor';
 import { metaReducers } from './store/reducers/pokemonList.metareducer';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderComponent } from './components/loader/loader.component';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { metaReducers } from './store/reducers/pokemonList.metareducer';
     PokeVoteComponent,
     HeaderComponent,
     PokeListComponent,
-    PokeDetailsComponent
+    PokeDetailsComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ import { metaReducers } from './store/reducers/pokemonList.metareducer';
     MatDialogModule,
     MatTableModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     StoreModule.forRoot({
       pokemonList: pokemonListReducer
     },
@@ -52,6 +57,11 @@ import { metaReducers } from './store/reducers/pokemonList.metareducer';
     })
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
     {
 			provide: HTTP_INTERCEPTORS,
 			useClass: ErrorCatchingInterceptor,
