@@ -25,6 +25,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
     HeaderComponent,
     PokeListComponent,
     PokeDetailsComponent,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

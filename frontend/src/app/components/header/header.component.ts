@@ -1,9 +1,10 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ListClearedAction } from 'src/app/store/actions/pokemonList.action';
 import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
 import { PokemonService } from 'src/app/services/pokemon/pokemon.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -15,15 +16,15 @@ export class HeaderComponent {
   @Input({ required: true }) public title!: string;
 
   constructor(
-    private store: Store,
-    private snackbarService: SnackbarService,
     public pokemonService: PokemonService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
     ) {}
 
-  clearVotes() {
-    this.store.dispatch(new ListClearedAction());
-    this.snackbarService.openSnackBar('Votes cleared');
+  openDialog() {
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '50%'
+    });
   }
 
   goToPokemonList() {

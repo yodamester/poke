@@ -32,3 +32,26 @@ h2 {
         width: 50%;
     }
 }
+
+.modal-wrapper {
+    padding: 3%;
+
+    h2 {
+        color: #000;
+    }
+
+    h3 {
+        font-weight: bold;
+    }
+
+    button {
+        background: #B01DE2 !important;
+        color: #fff !important;
+        margin-right: 10px;
+        box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5);
+
+        &:hover {
+            background: #E21DB2 !important;
+        }
+    }
+}
