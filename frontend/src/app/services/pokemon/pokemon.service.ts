@@ -8,15 +8,17 @@ import { Pokemon } from 'src/app/models/pokemon.model';
   providedIn: 'root'
 })
 export class PokemonService {
-  public pokemonQuery: QueryRef<{bookingDetails: [Pokemon]}, { offset: number}>;
+  public pokemonQuery: QueryRef<{bookingDetails: [Pokemon]}, { limit: number, offset: number}>;
+  public limit = 50;
+  public offset = 0;
 
   constructor(
     private http: HttpClient,
     private apollo: Apollo
     ) {
       this.pokemonQuery = this.apollo.watchQuery({
-        query: gql`query gql {
-          pokemons {
+        query: gql`query gql($limit: Int!, $offset: Int!) {
+          pokemons(limit: $limit, offset: $offset) {
             id
             name
             weight
@@ -31,7 +33,11 @@ export class PokemonService {
               value
             }
           }
-        }`
+        }`,
+        variables: {
+          limit: this.limit,
+          offset: this.offset
+        }
       });
    }
 

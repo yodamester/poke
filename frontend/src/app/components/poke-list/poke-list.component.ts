@@ -17,7 +17,10 @@ export class PokeListComponent {
   constructor(private store: Store<AppState>) {
     this.store.select((store) => store.pokemonList).subscribe(data => {
       if(data) {
-        this.pokemonList = data;
+        let sajt = data;
+        sajt.sort(
+          (p1, p2) => (p1.voteCount < p2.voteCount) ? 1 : (p1.voteCount > p2.voteCount) ? -1 : 0);
+      this.pokemonList = sajt;
         console.log(this.pokemonList);
       }
     });

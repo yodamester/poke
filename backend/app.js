@@ -24,7 +24,7 @@ app.get("/getPokemons", (req, res) => {
 
 const typeDefs = gql`  
   type Query {
-    pokemons: [Pokemon]
+    pokemons(limit: Int!, offset: Int!): [Pokemon]
   }
 
   type Pokemon {
@@ -50,7 +50,7 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        pokemons: () => waitForIt(pokeArray)
+        pokemons: (parent, args) => getPokemons(args.limit, args.offset)
     },
     Pokemon: {
         id: (parent) => parent.id,
@@ -71,20 +71,14 @@ const resolvers = {
     }
   };
 
-async function waitForIt(value) {
-    await getPokemons();
-    return value;
-}
-
-async function getPokemons() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
+async function getPokemons(limit, offset) {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit='+limit+'&offset='+offset);
     const data = await response.json();
     for (const pokemon of data.results) {  
         const pokemon2 = await fetch(pokemon.url);
         const data2 = await pokemon2.json();
         pokeArray.push(data2);
     }
-    //console.log(pokeArray);
     return pokeArray;
 }
 

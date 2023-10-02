@@ -1,11 +1,7 @@
 <h2>Top voted Pokemons</h2>
 
-<div *ngIf="pokemonList.length < 1">
+<div *ngIf="pokemonList.length === 0">
     No voted Pokemons yet.
-</div>
-
-<div *ngFor="let pokemon of pokemonListObservable | async">
-    {{pokemon.name}}
 </div>
 
 <table *ngIf="pokemonList.length > 0" mat-table [dataSource]="pokemonList" class="mat-elevation-z8">
@@ -22,5 +18,5 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
+
 </table>
