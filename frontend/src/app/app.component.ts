@@ -10,5 +10,5 @@ import { Pokemon } from './models/pokemon.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'poke-app';
+  title = 'Pokemon app';
 }

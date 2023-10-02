@@ -24,6 +24,7 @@ import { metaReducers } from './store/reducers/pokemonList.metareducer';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     MatTableModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     StoreModule.forRoot({
       pokemonList: pokemonListReducer
     },

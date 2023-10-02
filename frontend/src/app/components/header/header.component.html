@@ -1,4 +1,17 @@
-<h1>{{ title }}</h1>
-<button mat-button (click)="clearVotes()">Reset votes</button>
-<button mat-button (click)="goToPokemonVote()">Vote for Pokemons</button>
-<button mat-button (click)="goToPokemonList()">Top 10 Pokemons</button>
+<header>
+    <h1>{{ title }}</h1>
+    <nav>
+        <button mat-button (click)="clearVotes()">Reset votes</button>
+        <button mat-button (click)="goToPokemonVote()">Vote for Pokemons</button>
+        <button mat-button (click)="goToPokemonList()">Top 10 Pokemons</button>
+    </nav>
+    <div class="pagination">
+        <button [disabled]="pokemonService.offset === 0" (click)="changePagination({increase: false})">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <span>Currently displaying Pokemons from {{pokemonService.offset}} to {{pokemonService.limit}}</span>
+        <button (click)="changePagination({increase: true})">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+    </div>
+</header>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Pokemon } from 'src/app/models/pokemon.model';
 
@@ -9,6 +9,7 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 })
 export class PokemonService {
   public pokemonQuery: QueryRef<{bookingDetails: [Pokemon]}, { limit: number, offset: number}>;
+  public reloadPokemonList: BehaviorSubject<boolean>;
   public limit = 50;
   public offset = 0;
 
@@ -39,6 +40,8 @@ export class PokemonService {
           offset: this.offset
         }
       });
+
+      this.reloadPokemonList = new BehaviorSubject<boolean>(false);
    }
 
   getPokemons(): Observable<any> {

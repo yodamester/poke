@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { PokemonService } from '../../services/pokemon/pokemon.service';
 import { Observable, take } from 'rxjs';
 import { Pokemon } from '../../models/pokemon.model';
@@ -28,6 +28,12 @@ export class PokeVoteComponent {
     private snackbarService: SnackbarService
     ) {
     this.getPokemons();
+
+    this.pokemonService.reloadPokemonList.subscribe(res => {
+      if(res) {
+        this.pokemonService.pokemonQuery.refetch({ limit: this.pokemonService.limit, offset: this.pokemonService.offset});
+      }
+    });
   }
 
   openDialog(pokemon: Pokemon) {
@@ -51,6 +57,7 @@ export class PokeVoteComponent {
     this.pokemonService.pokemonQuery.valueChanges.pipe(take(1)).subscribe((result: any) => {
       this.pokemonList = result.data.pokemons;
       this.generateRandomPairs(result.data.pokemons);
+      this.pokemonService.reloadPokemonList.next(false);
     });
   }
 

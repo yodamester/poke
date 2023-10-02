@@ -1,5 +1,18 @@
-mat-card {
-    width: 46%;
-    display: inline-block !important;
-    margin: 2%;
+.inner-wrapper {
+    padding: 1%;
+
+    h2 {
+        color: #fff;
+    }
+
+    mat-card {
+        width: 46%;
+        display: inline-block !important;
+        margin: 2%;
+        background: rgba(255, 255, 255, 0.5);
+
+        h3 {
+            font-size: 22px;
+        }
+    }
 }

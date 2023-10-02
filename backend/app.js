@@ -79,6 +79,7 @@ async function getPokemons(limit, offset) {
         const data2 = await pokemon2.json();
         pokeArray.push(data2);
     }
+    console.log('req complete');
     return pokeArray;
 }
 
