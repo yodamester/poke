@@ -46,8 +46,7 @@ export class PokeVoteComponent {
 
   openDialog(pokemon: Pokemon) {
     const dialogRef = this.dialog.open(PokeDetailsComponent, {
-      data: pokemon,
-      width: '50%'
+      data: pokemon
     },);
     dialogRef.afterClosed().subscribe(res => {
       if(res?.voted) {

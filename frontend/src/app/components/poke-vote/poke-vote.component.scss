@@ -27,6 +27,17 @@
     }
 }
 
+.cdk-overlay-pane {
+    width: 30% !important;
+}
+
+@media only screen and (max-width: 1280px) {
+
+    .cdk-overlay-pane {
+        width: 60% !important;
+    }
+}
+
 @media only screen and (max-width: 800px) {
 
     .cdk-overlay-pane {

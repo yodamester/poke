@@ -29,9 +29,7 @@ export class HeaderComponent {
     }
 
   openDialog() {
-    this.dialog.open(ConfirmDialogComponent, {
-      width: '50%'
-    });
+    this.dialog.open(ConfirmDialogComponent, {});
   }
 
   goToPokemonList() {

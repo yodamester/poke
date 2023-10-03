@@ -39,6 +39,7 @@ const resolvers = {
   };
 
 async function getPokemons(limit, offset) {
+    pokeArray = [];
     const response = await fetch(process.env.API_URL + 'pokemon?limit=' + limit + '&offset=' + offset);
     const data = await response.json();
     for (const pokemon of data.results) {  
