@@ -62,7 +62,6 @@ export class PokeVoteComponent {
   }
 
   getPokemons() {
-    console.log('getpokemons');
     this.pokemonService.pokemonQuery.valueChanges.pipe(take(1)).subscribe((result: any) => {
       this.pokemonList = result.data.pokemons;
       this.generateRandomPairs(result.data.pokemons);
