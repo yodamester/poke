@@ -19,7 +19,6 @@ import { Router } from '@angular/router';
 export class PokeVoteComponent {
   voteArray: Array<Pokemon> = [];
   votedPokemons: Array<Pokemon> = [];
-  pokemonListObservable!: Observable<any>;
   pokemonList: Array<Pokemon> = [];
 
   constructor(
@@ -38,7 +37,6 @@ export class PokeVoteComponent {
           this.generateRandomPairs(result.data.pokemons);
           this.pokemonService.reloadPokemonList.next(false);
           this.snackbarService.openSnackBar('Pokemon list refreshed');
-          this.router.navigate(['/poke-vote']);
         });
       }
     });
